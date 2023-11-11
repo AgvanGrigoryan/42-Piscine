@@ -11,30 +11,30 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <limits.h>
 
-void	recursive_print(int nb)
+void	ft_putchar(char chr)
 {
-	char	k;
-
-	if (nb == 0)
-		return ;
-	if (nb < 0)
-	{	
-		write(1, "-", 1);
-		nb *= -1;
-	}
-	k = '0' + nb % 10;
-	if (nb > 0)
-		recursive_print(nb / 10);
-	write(1, &k, 1);
+	write(1, &chr, 1);
 }
 
 void	ft_putnbr(int nb)
 {
-	if (nb == 0)
-		write(1, "0", 1);
-	else if (nb <= -2147483648)
-		write(1, "-2147483648", 11);
+	if (nb == INT_MIN)
+	{
+		ft_putnbr(nb / 10);
+		nb = -(nb % 10);
+	}
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb = -nb;
+	}
+	if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putchar('0' + (nb % 10));
+	}
 	else
-		recursive_print(nb);
+		ft_putchar('0' + nb);
 }
