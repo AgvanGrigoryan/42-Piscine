@@ -43,7 +43,7 @@ char	*ft_strcapitalize(char *str)
 			is_frst_of_wrd = 1;
 			i++;
 			continue ;
-		}	
+		}
 		if (is_frst_of_wrd && alpha == 1)
 			str[i] -= UPP_LOW_DIFF;
 		else if (!is_frst_of_wrd && alpha == 2)
