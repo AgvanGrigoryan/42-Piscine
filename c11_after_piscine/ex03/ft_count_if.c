@@ -27,21 +27,21 @@ int	is_a(char *str)
 	}
 	return (0);
 }*/
-int ft_count_if(char **tab, int length, int(*f)(char *))
+int	ft_count_if(char **tab, int length, int (*f)(char *))
 	{
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	i = 0;
 	count = 0;
 	while (i < length && tab[i])
+	{
+		if ((*f)(tab[i]))
 		{
-			if ((*f)(tab[i]))
-				{
-					count++;
-				}
-			i++;
+			count++;
 		}
+		i++;
+	}
 	return (count);
 }
 /*
@@ -49,6 +49,6 @@ int	main(void)
 {
 char *arr[] = {"lolo", "ejan xndzor", "garo", "tiko", "vzgo", 0};
 int arr_len = sizeof(arr) / sizeof(arr[0]);
-printf("========RESULT========\n\t%d\t\n", ft_count_if(arr, arr_len , &is_a));
+printf("====RESULT===\n\%d\n", ft_count_if(arr, arr_len , &is_a));
 return (0);
 }*/
