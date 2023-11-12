@@ -1,5 +1,5 @@
 # 42-Piscine
-## My code during 42 piscine in 42yerevan campus.
+## My code during 42 piscine in 42yerevan.
 ## I tried to write clean and good code, but not always because of short deadlines.
 # Hey try to learn it yourself, not cheat. You can do it, Good luck 😃💪
 
