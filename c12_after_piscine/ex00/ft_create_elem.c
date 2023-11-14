@@ -10,15 +10,59 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
+#include <stdio.h>
 #include "ft_list.h"
 
-/*void	read_data(t_list *list_item)
+/*int	ft_strlen(char *src)
 {
-	char *data_ptr = (char *)(list_item->data);
-	while (*data_ptr)
-		printf("%c", *data_ptr++);
-	printf("\n");
+	unsigned int	len;
+
+	len = 0;
+	while (src[len])
+		len++;
+	return (len);
 }*/
+
+/*void	ft_strncpy(char *dst, char *src, unsigned int src_l)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < src_l && *src)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+}*/
+
+/*char	*ft_strdup(char *src)
+{
+	char			*mem;
+	unsigned int	src_len;
+
+	src_len = ft_strlen(src);
+	mem = (char *)malloc(sizeof(char) * src_len + 1);
+	if (mem == NULL)
+		return (NULL);
+	ft_strncpy(mem, src, src_len);
+	return (mem);
+}*/
+
+/*void	print_list_data(t_list *list_item)
+{
+	char	*data_ptr;
+
+	while (list_item)
+	{
+		printf("List address: %p,\nList->next: %p,\n",
+			list_item, list_item->next);
+		data_ptr = (char *) list_item->data;
+		printf("List->data: '%s'\n\n", data_ptr);
+		list_item = list_item->next;
+	}
+}*/
+
 t_list	*ft_create_elem(void *data)
 {
 	t_list	*list_elem;
@@ -30,12 +74,10 @@ t_list	*ft_create_elem(void *data)
 	list_elem->data = data;
 	return (list_elem);
 }
-/*
-int main(void)
+/*int main(void)
 {
-	t_list list_item1;
-	list_item1.data = malloc(sizeof(char) * 10);
-	char *item2_data = "agvan gr";
-	list_item1.next = ft_create_elem((void *)item2_data);
-	read_data(list_item1.next);
+	t_list *list_item1;
+	char *item1_data = ft_strdup("FIRST ITEM DATA");
+	list_item1 = ft_create_elem((void *)item1_data);
+	print_list_data(list_item1);
 }*/
