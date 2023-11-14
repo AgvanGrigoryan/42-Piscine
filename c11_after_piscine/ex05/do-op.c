@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <limits.h>
-#include <unistd.h>
-
-int	is_numeric(char chr)
-{
-	return ('0' <= chr && chr <= '9');
-}
+#include "utils.h"
 
 int	ft_atoi(char *str)
 {
@@ -26,12 +21,12 @@ int	ft_atoi(char *str)
 	sign = 1;
 	i = 0;
 	res = 0;
-
-	if (str[i] && str[i] == '+')
+	while (is_space(str[i]))
 		i++;
-	else if (str[i] == '-')
+	while (str[i] && (str[i] == '+' || str[i] == '-'))
 	{
-		sign *= -1;
+		if (str[i] == '-')
+			sign *= -1;
 		i++;
 	}
 	while (str[i] && is_numeric(str[i]))
@@ -42,20 +37,21 @@ int	ft_atoi(char *str)
 	}
 	return (res * sign);
 }
-void	ft_putchar(char chr)
-{
-	write(1, &chr, 1);
-}
+
 int	is_zero(int num, char *msg)
 {
 	if (num == 0)
 	{
 		while (*msg)
-			write(1, msg++, 1);
+		{
+			ft_putchar(*msg);
+			msg++;
+		}
 		return (1);
 	}
 	return (0);
 }
+
 void	ft_putnbr(int nb)
 {
 	if (nb == INT_MIN)
@@ -77,42 +73,46 @@ void	ft_putnbr(int nb)
 		ft_putchar('0' + nb);
 }
 
-void	ft_calc(char *value1, char sign, char *value2)
+void	ft_calc(int num1, char sign, int num2)
 {
-	int num1;
-	int	num2;
-
-	num2 = ft_atoi(value2);
-	num1 = ft_atoi(value1);
-	switch (sign)
+	if (sign == '+')
+		ft_putnbr(num1 + num2);
+	else if (sign == '-')
+		ft_putnbr(num1 - num2);
+	else if (sign == '*')
+		ft_putnbr(num1 * num2);
+	else if (sign == '/')
 	{
-		case '+':
-			ft_putnbr(num1 + num2);
-			break;
-		case '-':
-			ft_putnbr(num1 - num2);
-			break;
-		case '*':
-			ft_putnbr(num1 * num2);
-			break;
-		case '/':
-			if (is_zero(num2,"Stop : division by zero"))
-				break ;
+		if (!is_zero(num2, "Stop : division by zero"))
 			ft_putnbr(num1 / num2);
-			break;
-		case '%':
-			if (is_zero(num2, "Stop : module by zero"))
-				break ;
-			ft_putnbr(num1 % num2);
-			break;
-		default:
-			write(1, "0", 1);
 	}
+	else if (sign == '%')
+	{
+		if (!is_zero(num2, "Stop : modulo by zero"))
+			ft_putnbr(num1 % num2);
+	}
+	else
+		ft_putchar('0');
+	ft_putchar('\n');
 }
 
 int	main(int argc, char *argv[])
 {
+	int	num1;
+	int	num2;
+
 	if (argc != 4)
 		return (0);
-	ft_calc(argv[1], *(argv[2]), argv[3]);
+	if (ft_strlen(argv[2]) > 1)
+	{
+		ft_putchar('0');
+		ft_putchar('\n');
+	}
+	else
+	{
+		num1 = ft_atoi(argv[1]);
+		num2 = ft_atoi(argv[3]);
+		ft_calc(num1, argv[2][0], num2);
+	}
+	return (0);
 }
